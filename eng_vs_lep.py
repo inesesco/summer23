@@ -149,14 +149,14 @@ fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 6))
 sns.boxplot(ax=axes[0], data=[other_languages_sud, english_speakers_sud], flierprops=dict(marker='o', markersize=5, markerfacecolor='red', linestyle='none'), color="purple")
 axes[0].set_xlabel('Language Group')
 axes[0].set_ylabel('% of members with SUD')
-axes[0].set_title('Distribution of SUD %: English Speakers vs. LEP')
+axes[0].set_title(f'Dist. of % of Members with SUD (p-val: {p_value_sud})')
 axes[0].set_xticklabels(['Other Languages', 'English Speakers'])
 
 # Box plot for Mental Health Conditions Percentages
 sns.boxplot(ax=axes[1], data=[other_languages_mhc, english_speakers_mhc], flierprops=dict(marker='o', markersize=5, markerfacecolor='red', linestyle='none'), color="pink")
 axes[1].set_xlabel('Language Group')
 axes[1].set_ylabel('% of members with Mental Health Conditions')
-axes[1].set_title('Distribution of Mental Health Conditions %: English Speakers vs. LEP')
+axes[1].set_title(f'Dist. of % of Members with Mental Health Conditions (p-val: {p_value_mhc})')
 axes[1].set_xticklabels(['Other Languages', 'English Speakers'])
 
 # Add text labels for languages with significant SUD difference from English
