@@ -50,20 +50,20 @@ for condition in conditions:
 
     # Print the results
     print()
-    print(f"Observed difference in percentages ({condition}):", observed_diff)
+    print(f"Mean observed difference in percentages ({condition}):", observed_diff)
     print(f"p-value ({condition}):", p_value)
 
     # Calculate the threshold based on English speakers' percentage
     threshold = calculate_threshold(english_speakers_condition.item())
 
     # Filter languages with significant difference from English
-    significant_languages = df_filtered[abs(df_filtered[f'% with {condition}']) >= threshold]
-
+    significant_languages = df_filtered[abs(df_filtered[f'% with {condition}']) >= abs(threshold)]
+    
     # Create subplots with box plots side by side for each condition
     plt.figure(figsize=(8, 6))
     sns.boxplot(data=[other_languages_condition, english_speakers_condition],
                 flierprops=dict(marker='o', markersize=5, markerfacecolor='red', linestyle='none'),
-                color="purple")
+                color="#253532")
     plt.xlabel('Language Group')
     plt.ylabel(f'% with {condition}')
     plt.title(f'Distribution of {condition} %: English Speakers vs. LEP')
@@ -75,7 +75,8 @@ for condition in conditions:
         significant_languages_list.append((row['Primary Language'], row[f'% with {condition}']))
     print(f"\nLanguages with the highest difference in {condition} % compared to English speakers:")
     for language, difference in significant_languages_list:
-        print(f"{language}: {difference:.2f}")
+        if language != 'ENGLISH':
+            print(f"{language}: {difference:.2f}")
 
     # Adjust spacing between subplots
     plt.tight_layout()
